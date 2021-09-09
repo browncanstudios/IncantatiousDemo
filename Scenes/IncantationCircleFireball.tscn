@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Assets/IncantationCircles/basic-incantation-circle-a-inactive.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/SpeechProcessor.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/IncantationCircleFireball.gd" type="Script" id=3]
+[ext_resource path="res://Assets/IncantationCircles/basic-incantation-circle-a-active-1.png" type="Texture" id=4]
+[ext_resource path="res://Assets/IncantationCircles/basic-incantation-circle-a-active-2.png" type="Texture" id=5]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "inactive",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "active",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 8, 8 )
+
+[node name="IncantationFireball" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Area2D"]
+scale = Vector2( 4, 4 )
+frames = SubResource( 1 )
+animation = "active"
+frame = 1
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2( 4, 4 )
+shape = SubResource( 2 )
+
+[node name="SpeechProcessor" parent="." instance=ExtResource( 2 )]
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_IncantationCircle_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_IncantationCircle_body_exited"]
+[connection signal="processed_message_received" from="SpeechProcessor" to="." method="_on_SpeechProcessor_processed_message_received"]
