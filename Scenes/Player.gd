@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 # the speed at which the player walks, configurable
-export var speed = 100
+export var speed = 200
 
 var velocity = Vector2(0.0, 0.0)
 var direction = Vector2(0.0, 1.0)
@@ -24,19 +24,12 @@ func _physics_process(_delta):
 	else:
 		velocity.y = 0
 
+	if Input.is_mouse_button_pressed(BUTTON_LEFT):
+		velocity = speed * (get_global_mouse_position() - global_position).normalized()
+
 	if !velocity.is_equal_approx(Vector2.ZERO):
 		direction = velocity.normalized()
 
 	# this function actually moves the character, and correctly
 	# handles collisions with basic objects like tiles
 	var _returned_velocity = move_and_slide(velocity, Vector2(0, 0), false, 4, 0, false)
-
-	# make the character wrap around the screen
-	if position.x < 0 - 16:
-		position.x = 640 - 16
-	elif position.x > 640 + 16:
-		position.x = 0 - 16
-	if position.y < 0 - 16:
-		position.y = 480 - 16
-	elif position.y > 480 + 16:
-		position.y = 0 - 16

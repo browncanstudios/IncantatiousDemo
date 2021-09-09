@@ -22,7 +22,6 @@ script = ExtResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 2, 2 )
 frames = SubResource( 1 )
-frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -31,3 +30,6 @@ shape = SubResource( 2 )
 
 [node name="WordBubble" parent="." instance=ExtResource( 4 )]
 position = Vector2( 82, -66 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
