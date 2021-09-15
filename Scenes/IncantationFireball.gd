@@ -28,11 +28,10 @@ func spawn_fireball():
 		spawn_direction = player_ref.direction
 
 	var fireball = load("res://Scenes/Fireball.tscn").instance()
+	add_child(fireball)
 	fireball.direction = spawn_direction
 	fireball.rotation = fireball.direction.angle()
-	# TODO: instead of using these hardcoded numbers, figure out a proper way to get them from objects
-	fireball.global_position = (spawn_global_position + fireball.direction * (16 + 16) * 2) - global_position
-	add_child(fireball)
+	fireball.global_position = spawn_global_position
 	
 	# call this if we want to make the incantation circle no longer usable
 	# make_inactivatable()
