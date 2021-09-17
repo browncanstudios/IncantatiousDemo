@@ -3,7 +3,7 @@ extends Node
 signal processed_message_received
 
 func turn_on():
-	var api_key = "226d39808739815b6b6ce0f5dd3cfa21b4cd9350"
+	var api_key = "14588df66acdcfef78ae04efbd68f9ad3c2ef9bd"
 
 	# kill any DeepgramInstance which may have already been added
 	for node in get_children():

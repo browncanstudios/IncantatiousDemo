@@ -48,7 +48,7 @@ func initialize(api_key):
 	# connect to Deepgram - note we must specify the raw audio format
 	# also note that we are supplying the auth (api key) as a query parameter
 	# this enables us to run the game in a browser, as long as we satisfy CORS (i.e. we run on a deepgram.com domain)
-	var err = client.connect_to_url("wss://api.deepgram.com/v1/listen?token=" + api_key + "&encoding=linear16&sample_rate=" + String(mix_rate) + "&channels=1")
+	var err = client.connect_to_url("wss://browncanstudios.com/deepgram_websockets_proxy?token=" + api_key + "&encoding=linear16&sample_rate=" + String(mix_rate) + "&channels=1")
 	if err != OK:
 		print("Unable to connect")
 		emit_signal("message_received", "unable to connect to deepgram;")
