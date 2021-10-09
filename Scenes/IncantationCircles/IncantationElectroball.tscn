@@ -25,21 +25,21 @@ extents = Vector2( 8, 8 )
 [node name="IncantationElectroball" type="Node2D"]
 script = ExtResource( 5 )
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="IncantationCircle" type="Area2D" parent="."]
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="Area2D"]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="IncantationCircle"]
 scale = Vector2( 2, 2 )
 frames = SubResource( 1 )
 animation = "active"
 frame = 1
 playing = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="IncantationCircle"]
 scale = Vector2( 2, 2 )
 shape = SubResource( 2 )
 
 [node name="SpeechProcessor" parent="." instance=ExtResource( 4 )]
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_IncantationCircle_body_entered"]
-[connection signal="body_exited" from="Area2D" to="." method="_on_IncantationCircle_body_exited"]
+[connection signal="body_entered" from="IncantationCircle" to="." method="_on_IncantationCircle_body_entered"]
+[connection signal="body_exited" from="IncantationCircle" to="." method="_on_IncantationCircle_body_exited"]
 [connection signal="processed_message_received" from="SpeechProcessor" to="." method="_on_SpeechProcessor_processed_message_received"]

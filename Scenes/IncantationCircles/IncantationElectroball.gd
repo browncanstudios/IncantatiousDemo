@@ -6,9 +6,9 @@ var player_ref
 
 func _ready():
 	if active:
-		$Area2D/AnimatedSprite.set_animation("active")
+		$IncantationCircle/AnimatedSprite.set_animation("active")
 	else:
-		$Area2D/AnimatedSprite.set_animation("inactive")
+		$IncantationCircle/AnimatedSprite.set_animation("inactive")
 
 	# uncomment this to test this scene by itself
 	# $SpeechProcessor.turn_on()
@@ -50,14 +50,14 @@ func _on_IncantationCircle_body_exited(body):
 
 func activate(player):
 	active = true
-	$Area2D/AnimatedSprite.set_animation("active")
+	$IncantationCircle/AnimatedSprite.set_animation("active")
 	$SpeechProcessor.turn_on()
 	player_ref = player
 	player_ref.get_node("WordBubble").activate()
 
 func deactivate():
 	active = false
-	$Area2D/AnimatedSprite.set_animation("inactive")
+	$IncantationCircle/AnimatedSprite.set_animation("inactive")
 	$SpeechProcessor.turn_off()
 	if player_ref != null:
 		player_ref.get_node("WordBubble").deactivate()

@@ -1,5 +1,7 @@
 extends Node2D
 
+signal destroy_boulders
+
 export var activatable = true
 var active = false
 var player_ref
@@ -16,25 +18,11 @@ func _ready():
 func _on_SpeechProcessor_processed_message_received(message):
 	if player_ref != null:
 		player_ref.get_node("WordBubble").append(message)
-	if message.count("fire") > 0:
-		spawn_fireball()
+	if message.count("explosion") > 0:
+		emit_signal("destroy_boulders")
 
-# TODO: consider who owns this fireball
-func spawn_fireball():
-	var spawn_global_position = global_position
-	var spawn_direction = Vector2(0.0, 1.0)
-	if player_ref != null:
-		spawn_global_position = player_ref.global_position
-		spawn_direction = player_ref.direction
-
-	var fireball = load("res://Scenes/Fireball.tscn").instance()
-	add_child(fireball)
-	fireball.direction = spawn_direction
-	fireball.rotation = fireball.direction.angle()
-	fireball.global_position = spawn_global_position
-	
-	# call this if we want to make the incantation circle no longer usable
-	# make_inactivatable()
+		# call this if we want to make the incantation circle no longer usable
+		make_inactivatable()
 
 func _on_IncantationCircle_body_entered(body):
 	if !activatable:
